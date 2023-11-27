@@ -21,9 +21,9 @@ return {
     })
 
     local function on_attach()
+      -- diagnostics
       vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         virtual_text = true,
-        -- delay update diagnostics
         update_in_insert = true,
       })
     end
@@ -34,24 +34,24 @@ return {
           on_attach = on_attach,
         })
       end,
-    })
-
-    -- lua_language_server
-    lspconfig.lua_ls.setup({
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { 'vim' },
+      ['lua_ls'] = function()
+        lspconfig.lua_ls.setup({
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { 'vim' },
+              },
+              runtime = {
+                version = 'LuaJIT',
+              },
+              workspace = {
+                checkThirdParty = false,
+                library = vim.api.nvim_get_runtime_file('', true),
+              },
+            },
           },
-          runtime = {
-            version = 'LuaJIT',
-          },
-          workspace = {
-            checkThirdParty = false,
-            library = vim.api.nvim_get_runtime_file('', true),
-          },
-        },
-      },
+        })
+      end,
     })
 
     -- lsp key mapping

@@ -1,7 +1,7 @@
 return {
   'ray-x/lsp_signature.nvim',
   dependencies = {
-    'neovim/nvim-lspconfig',
+    'williamboman/mason-lspconfig.nvim',
   },
   config = function()
     local lsp_signature = require('lsp_signature')
