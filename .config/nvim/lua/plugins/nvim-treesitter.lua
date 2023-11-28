@@ -23,6 +23,8 @@ return {
         'vue',
         'javascript',
         'json',
+        'cmake',
+        'make',
         'markdown',
         'markdown_inline',
       },
@@ -30,7 +32,10 @@ return {
       ignore_install = {},
       sync_install = false,
       auto_install = true,
-      highlight = { enable = true },
+      highlight = {
+        enable = true,
+        disable = { 'make' },
+      },
       incremental_selection = {
         enable = true,
         keymaps = {
