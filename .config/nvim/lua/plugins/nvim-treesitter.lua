@@ -34,7 +34,7 @@ return {
       auto_install = true,
       highlight = {
         enable = true,
-        disable = { 'make' },
+        -- disable = { 'make' },
       },
       incremental_selection = {
         enable = true,
