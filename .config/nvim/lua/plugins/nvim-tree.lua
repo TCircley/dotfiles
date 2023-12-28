@@ -9,12 +9,14 @@ return {
   init = function()
     local api = require('nvim-tree.api')
 
-    local function open_nvim_tree(data)
-      local is_real_file = vim.fn.filereadable(data.file) == 1
-      local is_directory = vim.fn.isdirectory(data.file) == 1
-      local is_no_name = data.file == '' and vim.bo[data.buf].buftype == ''
+    local function open_nvim_tree(args)
+      local path = vim.v.argv[3]
+      local is_real_file = vim.fn.filereadable(path) == 1
+      local is_directory = vim.fn.isdirectory(path) == 1
+      local is_no_name = args.file == '' and vim.bo[args.buf].buftype == ''
 
       if is_directory then
+        vim.cmd.cd(path)
         api.tree.open()
       elseif is_real_file or is_no_name then
         api.tree.toggle({ focus = false, find_file = true })
@@ -23,7 +25,7 @@ return {
       end
     end
 
-    vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
+    vim.api.nvim_create_autocmd({ 'VimEnter' }, { once = true, callback = open_nvim_tree })
   end,
   config = function()
     vim.g.loaded_netrw = 1
@@ -85,6 +87,7 @@ return {
               staged = '+',
               unstaged = '~',
               deleted = '-',
+              ignored = '',
             },
           },
         },
