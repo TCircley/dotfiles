@@ -9,6 +9,7 @@ return {
     lsp_signature.setup({
       bind = true,
       wrap = true,
+      hint_enable = false,
       floating_window = true,
       floating_window_above_cur_line = true,
     })

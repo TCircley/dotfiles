@@ -8,24 +8,10 @@ return {
     local mason_lspconfig = require('mason-lspconfig')
     local lspconfig = require('lspconfig')
 
-    mason_lspconfig.setup({
-      ensure_installed = {
-        'lua_ls',
-        'vuels',
-        'clangd',
-        'emmet_language_server',
-        'html',
-        'tsserver',
-        'asm_lsp',
-      },
-    })
+    mason_lspconfig.setup({})
 
     local function on_attach()
-      -- diagnostics
-      vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = true,
-        update_in_insert = true,
-      })
+      vim.diagnostic.config({ virtual_text = false, signs = true, underline = true, update_in_insert = true })
     end
 
     mason_lspconfig.setup_handlers({

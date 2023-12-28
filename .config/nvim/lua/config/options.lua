@@ -14,3 +14,4 @@ opt.cursorline = true
 opt.termguicolors = true
 opt.smartcase = true
 opt.ignorecase = true
+opt.signcolumn = 'auto:2'
