@@ -17,14 +17,6 @@ return {
     configs.setup({
       ensure_installed = {
         'asm',
-        'c',
-        'html',
-        'css',
-        'vue',
-        'javascript',
-        'json',
-        'cmake',
-        'make',
         'markdown',
         'markdown_inline',
       },
@@ -34,7 +26,6 @@ return {
       auto_install = true,
       highlight = {
         enable = true,
-        -- disable = { 'make' },
       },
       incremental_selection = {
         enable = true,
