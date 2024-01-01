@@ -41,7 +41,7 @@ return {
 
     lualine.setup({
       options = {
-        theme = 'tokyonight',
+        theme = 'auto',
         disabled_filetypes = { 'NvimTree' },
       },
       sections = {

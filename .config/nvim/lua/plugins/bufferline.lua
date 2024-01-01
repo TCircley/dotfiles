@@ -9,10 +9,10 @@ return {
     bufferline.setup({
       highlights = {
         fill = {
-          bg = '#1f2335',
+          bg = '#21202e',
         },
         offset_separator = {
-          bg = '#1f2335',
+          bg = '#21202e',
         },
       },
       options = {

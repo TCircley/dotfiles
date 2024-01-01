@@ -4,7 +4,7 @@ return {
   config = function()
     local tokyonight = require('tokyonight')
     tokyonight.setup({
-      style = 'storm',
+      style = 'moon',
     })
     vim.cmd('colorscheme tokyonight')
   end,
