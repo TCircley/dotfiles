@@ -8,7 +8,7 @@ return {
     local guard = require('guard')
 
     ft('lua'):fmt('stylua')
-    ft('javascript,typescript,javascriptreact,typescriptreact,vue'):fmt('prettier'):lint('eslint')
+    ft('javascript,typescript,javascriptreact,typescriptreact,vue'):fmt('prettier')
     ft('html,css'):fmt('prettier')
     ft('c,cpp'):fmt('clang-format'):lint('clang-tidy')
 
