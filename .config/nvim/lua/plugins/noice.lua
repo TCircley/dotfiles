@@ -1,10 +1,15 @@
+local filte_error_messages = {
+  event = 'msg_show',
+  kind = { 'emsg', 'lua_error' },
+  error = true,
+}
+
 return {
   'folke/noice.nvim',
   dependencies = {
     'MunifTanjim/nui.nvim',
     'rcarriga/nvim-notify',
   },
-  event = 'VeryLazy',
   config = function()
     local noice = require('noice')
     noice.setup({
@@ -33,6 +38,12 @@ return {
           size = {
             width = '35%',
           },
+        },
+      },
+      routes = {
+        {
+          view = 'mini',
+          filter = filte_error_messages,
         },
       },
     })
