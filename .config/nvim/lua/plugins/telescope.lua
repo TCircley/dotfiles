@@ -1,18 +1,22 @@
 return {
   'nvim-telescope/telescope.nvim',
+  cmd = 'Telescope',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    'stevearc/aerial.nvim',
   },
-  cmd = 'Telescope',
   keys = {
     { '<leader>p', ':Telescope find_files<CR>', noremap = true, silent = true, nowait = true },
     { '<leader>P', ':Telescope live_grep<CR>', noremap = true, silent = true, nowait = true },
     { '<leader>b', ':Telescope buffers<CR>', noremap = true, silent = true, nowait = true },
     { '<leader>q', ':Telescope oldfiles<CR>', noremap = true, silent = true, nowait = true },
+    { '<leader>o', ':Telescope aerial<CR>', noremap = true, silent = true, nowait = true },
   },
   config = function()
     local telescope = require('telescope')
     local actions = require('telescope.actions')
+
+    telescope.load_extension('aerial')
 
     telescope.setup({
       pickers = {
