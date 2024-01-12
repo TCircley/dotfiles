@@ -3,25 +3,60 @@ return {
   dependencies = {
     'williamboman/mason.nvim',
     'neovim/nvim-lspconfig',
+    'ray-x/lsp_signature.nvim',
+    'folke/lsp-colors.nvim',
   },
   config = function()
     local mason_lspconfig = require('mason-lspconfig')
     local lspconfig = require('lspconfig')
 
-    mason_lspconfig.setup({})
+    local function on_attach(client)
+      local ns = vim.lsp.diagnostic.get_namespace(client.id)
 
-    local function on_attach()
-      vim.diagnostic.config({ virtual_text = false, signs = true, underline = true, update_in_insert = true })
+      local diagnostic_config = {
+        virtual_text = false,
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+      }
+
+      if client.name == 'clangd' then
+        diagnostic_config.update_in_insert = true
+      end
+
+      vim.diagnostic.config(diagnostic_config, ns)
     end
 
+    mason_lspconfig.setup({})
     mason_lspconfig.setup_handlers({
       function(server_name)
         lspconfig[server_name].setup({
           on_attach = on_attach,
         })
       end,
+      ['clangd'] = function()
+        lspconfig.clangd.setup({
+          cmd = {
+            'clangd',
+            '--background-index',
+            '--clang-tidy',
+            '--all-scopes-completion',
+            '--completion-style=detailed',
+            '--header-insertion=iwyu',
+            '--pch-storage=disk',
+            '--log=error',
+            '--j=4',
+            '--inlay-hints',
+          },
+          on_attach = on_attach,
+          flags = {
+            debounce_text_changes = 150,
+          },
+        })
+      end,
       ['lua_ls'] = function()
         lspconfig.lua_ls.setup({
+          on_attach = on_attach,
           settings = {
             Lua = {
               diagnostics = {
@@ -48,7 +83,10 @@ return {
           return { desc = 'lsp: ' .. desc, buffer = ev.buf, noremap = true, silent = true, nowait = true }
         end
 
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts('hover'))
+        vim.keymap.set('n', 'K', function()
+          require('lsp_signature').toggle_float_win()
+        end, opts('hover'))
+        vim.keymap.set('n', 'H', vim.lsp.buf.hover, opts('hover'))
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts('go definition'))
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts('go declaration'))
         vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts('go type_definition'))

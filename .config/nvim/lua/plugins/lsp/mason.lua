@@ -1,8 +1,8 @@
 return {
   'williamboman/mason.nvim',
+  lazy = true,
   config = function()
-    local mason = require('mason')
-    mason.setup({
+    require('mason').setup({
       ui = {
         package_installed = '✓',
         package_pending = '➜',
