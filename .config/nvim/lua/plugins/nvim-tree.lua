@@ -60,8 +60,9 @@ return {
         sorter = 'case_sensitive',
       },
       filters = {
-        git_ignored = false,
+        git_ignored = true,
         dotfiles = true,
+        exclude = { '.vscode', '.eslintrc.js', '.prettierrc.js' },
       },
       reload_on_bufenter = true,
       actions = {
