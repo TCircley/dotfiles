@@ -42,11 +42,13 @@ return {
 
       vim.keymap.set('n', '<CR>', api.tree.change_root_to_node, opts('CD'))
       vim.keymap.set('n', '<BS>', api.tree.change_root_to_parent, opts('Up'))
-      vim.keymap.set('n', '<C-o>', api.node.open.vertical, opts('Open Vertical Split'))
-      vim.keymap.set('n', '<C-h>', api.node.open.horizontal, opts('Open Horizontal Split'))
+      vim.keymap.set('n', 'O', api.node.run.system, opts('Run System'))
+      vim.keymap.set('n', 'o', api.node.open.vertical, opts('Open Vertical Split'))
+      vim.keymap.set('n', '<TAB>', api.node.open.horizontal, opts('Open Horizontal Split'))
       vim.keymap.set('n', ']', api.tree.expand_all, opts('Expand all'))
       vim.keymap.set('n', '[', api.tree.collapse_all, opts('Collapse all'))
       vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
+      vim.keymap.set('n', 's', api.tree.search_node, opts('Search'))
     end
 
     require('nvim-tree').setup({
