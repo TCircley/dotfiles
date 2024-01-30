@@ -83,9 +83,6 @@ return {
           return { desc = 'lsp: ' .. desc, buffer = ev.buf, noremap = true, silent = true, nowait = true }
         end
 
-        vim.keymap.set('n', 'K', function()
-          require('lsp_signature').toggle_float_win()
-        end, opts('hover'))
         vim.keymap.set('n', 'H', vim.lsp.buf.hover, opts('hover'))
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts('go definition'))
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts('go declaration'))

@@ -9,7 +9,7 @@ return {
     'hrsh7th/cmp-cmdline',
     'dcampos/nvim-snippy',
     'dcampos/cmp-snippy',
-    'honza/vim-snippets',
+    -- 'honza/vim-snippets',
   },
   config = function()
     local cmp = require('cmp')
